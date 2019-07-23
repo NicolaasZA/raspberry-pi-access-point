@@ -1,16 +1,19 @@
-auto lo
-auto br0
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
 
+# Loopback - lo
+auto lo
 iface lo inet loopback
+
+# Ethernet - eth0 - DHCP from external network
+allow-hotplug eth0
 iface eth0 inet dhcp
 
+# Wireless - wlan0 - Manual
 allow-hotplug wlan0
-allow-hotplug eth0
 iface wlan0 inet manual
 
+# Bridge - br0
+auto br0
 iface br0 inet dhcp
-        bridge_fd 1
-        bridge_hello 3
-        bridge_maxage 10
-        bridge_stp off
-        bridge_ports eth0 wlan0
+bridge_ports eth0 wlan0
